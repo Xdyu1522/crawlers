@@ -13,6 +13,8 @@ class Haokan():
         # {'https': 'https://121.41.171.223:3128'}]
         proxy = []
         headers = {'User-Agent':str(UserAgent().random)}
+        sqln = f'DROP TABLE IF EXISTS {self.word}'
+        self.cursor.execute(sqln)
         sql1 = f'CREATE TABLE IF NOT EXISTS {self.word} (id int(5) PRIMARY KEY,Viedo_id VARCHAR(30),Video_title VARCHAR(100),Video_author VARCHAR(20),Viedo_length VARCHAR (10),Video_link VARCHAR(5000),Viedo_cover_src VARCHAR(5000),Download_link VARCHAR(5000)) DEFAULT CHARSET utf8 COLLATE utf8_general_ci;'
         self.cursor.execute(sql1)
         n = 1
@@ -55,5 +57,5 @@ class Haokan():
 
 
 if __name__ == '__main__': 
-    haokan = Haokan('北京冬奥会第二金')
+    haokan = Haokan('北京冬奥会')
     haokan.main()
