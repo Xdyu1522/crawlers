@@ -1,4 +1,4 @@
-import requests, json, pymysql, random, time
+import requests, json, pymysql, random, time, json
 from fake_useragent import UserAgent
 from concurrent.futures import ThreadPoolExecutor
 from concurrent.futures import wait
@@ -70,4 +70,26 @@ class Get_users():
 
 if __name__ == '__main__': 
     get = Get_users()
-    get.main(10, 20, 5)
+    st = input('请输入起始UID:')
+    while not st.isdigit():
+        st = input('请输入起始UID:')
+    st = int(st)
+
+    ed = input('请输入结束UID:')
+    while not ed.isdigit():
+        ed = input('请输入起始UID:')
+    ed = int(ed)
+
+    th = input('请输入线程数:')
+    while not th.isdigit():
+        th = input('请输入线程数;')
+    th = int(th)
+    
+    get.main(st ,ed , th)
+
+    a = input('是否保存json?(是输入y,否上输入任意值)')
+    if a == 'y':
+        with open(f'UID{st}-{ed}.json', 'w') as f:
+            tmp = {'data': get.all}
+            f.write(json.dumps(tmp, indent=4))
+
